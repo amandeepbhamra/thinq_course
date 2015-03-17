@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @course_package.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course_package.description %>
+</p>
+
+<p>
+  <strong>Video:</strong>
+  <%= @course_package.video %>
+</p>
+
+<p>
+  <strong>Slideshow:</strong>
+  <%= @course_package.slideshow %>
+</p>
+
+<%= link_to 'Edit', edit_course_package_path(@course_package) %> |
+<%= link_to 'Back', course_packages_path %>
