@@ -1,0 +1,8 @@
+<% [:title, :description, :type, :audio, :video, :slideshow].each do |cm_attr| %>
+
+	<div class="field">
+		<%= f.label cm_attr %><br>
+		<%= cm_attr == :description ? (f.text_area cm_attr, :class => "form-control") : (f.text_field cm_attr, :class => "form-control") %>
+	</div>
+
+<% end %>

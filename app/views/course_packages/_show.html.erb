@@ -1,0 +1,6 @@
+<% ['title', 'description', 'video', 'slideshow'].each do |cp_attr| %>
+	<p>
+	  	<strong><%= cp_attr.humanize %>:</strong>
+	  	<%= course_package[cp_attr] %>
+	</p>	
+<% end %>

@@ -1,33 +1,42 @@
-<%= form_for(@course_package) do |f| %>
-  <% if @course_package.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course_package.errors.count, "error") %> prohibited this course_package from being saved:</h2>
+<%= nested_form_for(@course_package) do |f| %>
 
-      <ul>
-      <% @course_package.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<div class='row'>
+		<%= render "shared/error_messages", :object => @course_package %>
+	</div>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :video %><br>
-    <%= f.text_field :video %>
-  </div>
-  <div class="field">
-    <%= f.label :slideshow %><br>
-    <%= f.text_field :slideshow %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class='row'>
+
+		<div class='col-md-6'>
+			<h4>New Course Package</h4>
+			<%= render "form_fields", :f => f %>
+		</div>
+
+		<div class='col-md-6'>
+			<%= f.fields_for :course_modules, @course_module do |builder| %>
+				<h4>Course Module</h4>
+				<%= render "course_modules/form_fields", :f => builder %>
+				<%= builder.link_to_remove "Remove this Course Module" %>
+			<% end %>
+			<p><%= f.link_to_add "Add a Course Module", :course_modules %></p>
+		</div>
+
+	</div>
+
+	<div class='row'>
+
+		<div class='col-md-6'>
+			<h4>Course</h4>
+			<%= f.fields_for :course_course_packages, @course_course_package do |builder| %>
+				<h4>Course</h4>
+				<%= text_field_tag "search_courses", nil, data: {load: nil} %>
+				<%= builder.link_to_remove "Remove this Course" %>
+			<% end %>
+			<p><%= f.link_to_add "Add a Course", :course_course_packages %></p>
+		</div>
+
+	</div>
+
+	<div class="actions" style="text-align: center;">
+		<%= f.submit "Submit", :class => "btn btn-primary" %>
+	</div>
 <% end %>

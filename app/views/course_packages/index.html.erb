@@ -1,33 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h4>Listing Course Packages</h4>
 
-<h1>Listing Course Packages</h1>
+<div class = 'row'>
+	<%= link_to 'New Course package', new_course_package_path, :class => "btn btn-default pull-right" %>
+</div>
+<div class = 'row'>
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Video</th>
+				<th>Slideshow</th>
+				<th colspan="2"></th>
+			</tr>
+		</thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Video</th>
-      <th>Slideshow</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @course_packages.each do |course_package| %>
-      <tr>
-        <td><%= course_package.title %></td>
-        <td><%= course_package.description %></td>
-        <td><%= course_package.video %></td>
-        <td><%= course_package.slideshow %></td>
-        <td><%= link_to 'Show', course_package %></td>
-        <td><%= link_to 'Edit', edit_course_package_path(course_package) %></td>
-        <td><%= link_to 'Destroy', course_package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Course package', new_course_package_path %>
+		<tbody>
+			<% @course_packages.each do |course_package| %>
+				<tr>
+					<td><%= link_to course_package.title, course_package %></td>
+					<td><%= course_package.description %></td>
+					<td><%= course_package.video %></td>
+					<td><%= course_package.slideshow %></td>
+					<td><%= link_to 'Edit', edit_course_package_path(course_package) %></td>
+					<td><%= link_to 'Destroy', course_package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

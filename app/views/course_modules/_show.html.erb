@@ -1,0 +1,8 @@
+<% unless course_module.blank? %>
+	<% ['title', 'description', 'type', 'audio', 'video', 'slideshow'].each do |cm_attr| %>
+	  	<p>
+	      	<strong><%= cm_attr.humanize %>:</strong>
+	      	<%= course_module[cm_attr] %>
+	  	</p>  
+	<% end %>
+<% end %>

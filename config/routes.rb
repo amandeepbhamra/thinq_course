@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  resources :course_modules
-
-  resources :course_packages
-
-  resources :courses
-
+  
     devise_for :users
     
     resources :users
+
+  	resources :courses, :course_modules, :course_packages, :course_module_instances, :course_package_instances, :course_instances
 
     root to: 'users#index'
 

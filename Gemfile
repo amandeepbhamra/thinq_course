@@ -10,12 +10,12 @@ group :production, :development, :test do
 	gem 'nested_form'
 	gem 'will_paginate'
 	gem 'jquery-rails'
-	gem 'turbolinks'
 	gem 'jbuilder', '~> 2.0'
 	gem 'bootstrap-sass'
 	gem 'devise'
 	gem 'pundit'
 	# gem 'therubyracer', platforms: :ruby
+	# gem 'turbolinks'
 end
 
 group :development, :test do
@@ -29,6 +29,7 @@ group :development, :test do
     gem 'rack-mini-profiler'
     gem 'rails-erd'
     gem 'rails_layout'
+    gem 'faker'
 end
 
 gem 'sdoc', '~> 0.4.0', group: :doc

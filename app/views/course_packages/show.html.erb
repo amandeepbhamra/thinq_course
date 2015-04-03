@@ -1,24 +1,11 @@
-<p id="notice"><%= notice %></p>
+<%= render "show", :course_package => @course_package %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @course_package.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @course_package.description %>
-</p>
-
-<p>
-  <strong>Video:</strong>
-  <%= @course_package.video %>
-</p>
-
-<p>
-  <strong>Slideshow:</strong>
-  <%= @course_package.slideshow %>
-</p>
+<% unless @course_modules.blank? %>
+	<% @course_modules.each do |course_module| %>
+		<h4>Course Module</h4>
+		<%= render "course_modules/show", :course_module => course_module %>
+	<% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_course_package_path(@course_package) %> |
 <%= link_to 'Back', course_packages_path %>

@@ -1,0 +1,6 @@
+<% [:title, :description, :video, :slideshow].each do |cp_attr| %>
+	<div class="field">
+		<%= f.label cp_attr %><br>
+		<%= cp_attr == :description ? (f.text_area cp_attr, :class => "form-control") : (f.text_field cp_attr, :class => "form-control") %>
+	</div>
+<% end %>
