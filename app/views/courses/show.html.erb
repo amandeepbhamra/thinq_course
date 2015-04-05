@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
@@ -25,5 +24,22 @@
   <%= @course.logistics %>
 </p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
+<h4>Course Packages</h4>
+
+<% @course_packages.each do |course_package| %>
+	<%= link_to course_package.title, course_course_package_path(@course, course_package) %>
+	<% course_modules = @course_modules[course_package.id] %>
+	<% unless course_modules.blank? %>
+		<strong>Courses Modules: </strong>
+		<% course_modules.each do |course_module| %>
+			<%= link_to course_module.title, course_module %>
+		<% end %>
+	<% end %>
+	<br />
+<% end %>
+<% if current_user.role == 1 %>
+	<%= link_to 'Start', course_instances_path( course_id: @course.id, user_id: current_user.id ), method: :post, :class => "btn btn-primary" %>
+<% else %>
+	<%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
 <%= link_to 'Back', courses_path %>

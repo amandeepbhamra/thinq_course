@@ -11,7 +11,13 @@ class CoursePackagesController < ApplicationController
 	# GET /course_packages/1
 	# GET /course_packages/1.json
 	def show
-		@course_modules = @course_package.course_modules
+		if current_user.role == 0
+			@course_modules = @course_package.course_modules
+		else
+			@course 		= Course.find_by_id(params[:course_id])
+			@course_modules = @course.course_modules.where("course_package_id = ?", @course_package.id) unless @course.blank?
+			@course_package_instance = @course_package.course_package_instances.create(user_id: current_user.id, course_id: @course.id) if current_user.role == 1
+		end
 	end
 
 	# GET /course_packages/new

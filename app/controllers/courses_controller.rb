@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-	before_action :set_course, only: [:show, :edit, :update, :destroy]
+
+	before_action :set_course, only: [:show, :edit, :update, :destroy, :initialize]
 
 	# GET /courses
 	# GET /courses.json
@@ -7,7 +8,6 @@ class CoursesController < ApplicationController
 		@courses 		= Course.all
 		@courses 		= Course.where("title LIKE ?", "%#{params[:q]}%") if defined? params[:q] and !params[:q].blank?
 		@courses_json 	= @courses.map{ |v| {id: v[:id], title: v[:title]}}.to_json
-		debugger
 		respond_to do |format|
 			format.html
 			format.json { render json: @courses_json }
@@ -17,6 +17,8 @@ class CoursesController < ApplicationController
 	# GET /courses/1
 	# GET /courses/1.json
 	def show
+		@course_packages = @course.course_packages
+		@course_modules  = @course.course_modules.group_by{ |v| v.course_package_id }
 	end
 
 	# GET /courses/new
@@ -78,15 +80,16 @@ class CoursesController < ApplicationController
       		format.js { render 'course/get_tags'}
     	end
   	end
-
+  	
 	private
-		# Use callbacks to share common setup or constraints between actions.
-		def set_course
-			@course = Course.find(params[:id])
-		end
+	
+	# Use callbacks to share common setup or constraints between actions.
+	def set_course
+		@course = Course.find(params[:id])
+	end
 
-		# Never trust parameters from the scary internet, only allow the white list through.
-		def course_params
-			params.require(:course).permit(:title, :description, :video, :slideshow, :logistics)
-		end
+	# Never trust parameters from the scary internet, only allow the white list through.
+	def course_params
+		params.require(:course).permit(:title, :description, :video, :slideshow, :logistics)
+	end
 end

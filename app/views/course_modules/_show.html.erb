@@ -1,8 +1,12 @@
 <% unless course_module.blank? %>
 	<% ['title', 'description', 'type', 'audio', 'video', 'slideshow'].each do |cm_attr| %>
-	  	<p>
-	      	<strong><%= cm_attr.humanize %>:</strong>
-	      	<%= course_module[cm_attr] %>
-	  	</p>  
+		<p>
+		    <strong><%= cm_attr.humanize %>:</strong>
+		    <% if cm_attr == 'title' %>
+				<%= link_to course_module[cm_attr], ((current_user.role == 1 ) ? (course_course_package_course_module_path(@course.id, @course_package.id, course_module.id)) : course_module ) %>:
+			<% else %>
+		  	  	<%= course_module[cm_attr] %>
+		  	<% end %>  
+		</p>
 	<% end %>
 <% end %>

@@ -1,8 +1,13 @@
 class User < ActiveRecord::Base
+
+	acts_as_paranoid
 	
-	# Include default devise modules. Others available are:
-	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
+	has_many :course_instances
+	has_many :course_package_instances
+
+	has_many :course_module_instances
 
 	ROLES = { 0 => 'Admin', 1 => 'Learner', 2 => 'Guest' }
 	
